@@ -290,6 +290,7 @@ public class NewClock implements java.awt.event.ActionListener{
                 inInstance = false;
                 if(Integer.parseInt(breakEstimator.getText()) >= 1){
                     JOptionPane.showMessageDialog(frame, "Time to take a Break!");
+                    breakEstimator.setText("0");
                     inBreak = true;
                     startBreak();
                 }
@@ -377,7 +378,7 @@ public class NewClock implements java.awt.event.ActionListener{
 
     public void startBreak(){
         hoursTextField.setText("00");
-        minutesTextField.setText("0" + breakEstimator.getText());
+        minutesTextField.setText(breakEstimator.getText());
         secondsTextField.setText("00");
     }
     
@@ -396,7 +397,7 @@ public class NewClock implements java.awt.event.ActionListener{
             }
             else{
        
-                if(obj.setTime() && !obj.inInstance){
+                if(obj.setTime() && !obj.inInstance && !obj.inBreak){
                     obj.updateBreakEstimator();
                 }
             }
