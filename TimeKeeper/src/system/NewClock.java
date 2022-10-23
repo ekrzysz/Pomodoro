@@ -233,9 +233,11 @@ public class NewClock implements java.awt.event.ActionListener{
         breakEstimator.setEditable(false);
 
         inInstance = true;
-        if(!inBreak){
-           totalTimeEver = totalTimeEver + Integer.parseInt(minutesTextField.getText()); 
-           System.out.println(totalTimeEver);
+        if(!inBreak && isTimeUp()){
+           totalTimeEver = totalTimeEver + (Integer.parseInt(hoursTextField.getText()) * 3600 + Integer.parseInt(minutesTextField.getText()) * 60 + Integer.parseInt(secondsTextField.getText()) * 1); 
+           String[] formattedResult = new String[3];
+           formattedResult = format(totalTimeEver);
+           System.out.println(formattedResult[0] + ":" + formattedResult[1] + ":" + formattedResult[2]);
         }
         
         
@@ -290,7 +292,7 @@ public class NewClock implements java.awt.event.ActionListener{
                 inInstance = false;
                 if(Integer.parseInt(breakEstimator.getText()) >= 1){
                     JOptionPane.showMessageDialog(frame, "Time to take a Break!");
-                    breakEstimator.setText("0");
+                    //breakEstimator.getText()
                     inBreak = true;
                     startBreak();
                 }
@@ -300,6 +302,7 @@ public class NewClock implements java.awt.event.ActionListener{
                     secondsTextField.setEditable(true);
                     breakEstimator.setEditable(true);
                     inBreak = false;
+                    
                 }
                 break;
             }
@@ -380,6 +383,7 @@ public class NewClock implements java.awt.event.ActionListener{
         hoursTextField.setText("00");
         minutesTextField.setText(breakEstimator.getText());
         secondsTextField.setText("00");
+        breakEstimator.setText("0");
     }
     
     
